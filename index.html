@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{margin:0;padding:0;}
+body{text-align:center; vertical-align:middle;}
+nav{border-right:1px solid #EEE;width:120px;margin-top:20px;display:inline-block;font-size:0;}
+a{display:inline-block;width:29px;border:1px solid #EEE;height:28px;line-height:30px;border-right:none; text-decoration:none;background:yellow;font-size:16px;}
+a.active{color:red;font-size:700; text-shadow:1px 1px 1px red;}
+div{display:none;width:118px;height:118px;border:1px solid green;margin:0 auto;}
+div.active{display:block;background:green;}
+</style>
+<script>
+	function TabControl(json){
+		this.json=json || {};
+		this.json.className=this.json.className || '';
+		this.aBtn=document.getElementsByTagName('a');
+		this.aDiv=document.getElementsByTagName('div');
+		this.init();
+	}
+	TabControl.prototype.init=function(){
+		var _this=this;
+		for(var i=0;i<this.aBtn.length;i++){
+			this.aBtn[i].index=i;
+			this.aBtn[i].onclick=function(){
+				_this.clear();
+				_this.show(this.index);	
+			};
+		}
+	};
+	TabControl.prototype.clear=function(){
+		for(var i=0;i<this.aBtn.length;i++){
+			this.aBtn[i].className='';
+			this.aDiv[i].className='';
+		}
+	};
+	TabControl.prototype.show=function(iNow){
+		this.aBtn[iNow].className=this.json.className;
+		this.aDiv[iNow].className=this.json.className;
+	};
+	window.onload=function(){
+		new TabControl({
+			className:'active'	
+		});
+	};
+</script>
+</head>
+
+<body>
+<section>
+	<nav>
+		<a href="javascript:;" class="active">A</a>
+		<a href="javascript:;">B</a>
+		<a href="javascript:;">C</a>
+		<a href="javascript:;">D</a>
+	</nav>
+	<div class="active">A</div>
+	<div>B</div>
+	<div>C</div>
+	<div>D</div>
+</section>
+</body>
+</html>
